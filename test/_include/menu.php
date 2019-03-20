@@ -21,13 +21,13 @@
 					<a class="dropdown-item" href="cadastroProduto.php">Produto</a>
 				</div>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="login.php">Login</a>
-			</li>
+
+			<form class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form>
 		</ul>
-		<form class="form-inline my-2 my-lg-0">
-			<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-		</form>
+
+		<a class="btn btn-primary" href="login.php" role="button">Login</a>
 	</div>
 </nav>

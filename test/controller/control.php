@@ -1,7 +1,13 @@
 <?php
-include_once '../model/Pessoa.php';
-$nome     = isset(filter_input(INPUT_POST, 'inputNome', FILTER_SANITIZE_SPECIAL_CHARS));
-$senha    = isset(filter_input(INPUT_POST, 'inputSenha', FILTER_SANITIZE_SPECIAL_CHARS));
+	include_once '../model/Pessoa.php';
+	$email = $_POST["inputEmail"];
+	$senha = $_POST["inputSenha"];
 
-$p1 = new Pessoa();
-$p1->alterarCadastro($nome, $email, $senha, $rua);
+	/*if(empty($email) || empty($senha)) {
+		$_SESSION['msgLogin'] = "<p class='center red-text'>".'Informe email e senha!'."</p>";
+    	header('Location:../view/login.php');
+    	exit();
+	}*/
+
+	$p1 = new Pessoa();
+	$p1->efetuarLogin($email, $senha);

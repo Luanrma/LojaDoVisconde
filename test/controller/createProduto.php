@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once '../model/Produto.php';
 		$nomeProduto   = $_POST["inputNomeProduto"];
 		$fornecedor    = $_POST["inputFornecedor"];

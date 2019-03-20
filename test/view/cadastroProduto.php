@@ -1,3 +1,4 @@
+<?php session_start()  ?>
 <?php include_once '../_include/header.php' ?>
 <?php include_once '../_include/menu.php' ?>
 <!-- INÍCIO FORMULÁRIO -->
@@ -54,8 +55,7 @@
 					<div class="col-sm-3 col-md-3 col-lg-3">
 						<label for="inputSituacao">Situação</label>
 						<select id="inputSituacao" name="inputSituacao" class="form-control">
-							<option selected>Situação...</option>
-							<option>Ativo</option>
+							<option selected>Ativo</option>
 							<option>Inativo</option>
 						</select>
 					</div>
