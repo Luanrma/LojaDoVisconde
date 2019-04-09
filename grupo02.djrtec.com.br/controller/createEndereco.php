@@ -1,6 +1,7 @@
 <?php
 session_start();
-include_once '../model/Endereco.php';
+
+require_once ('../config.php');
 
 $objEndereco = new Endereco();
 

@@ -1,6 +1,7 @@
 <?php
 
-include_once '../model/Produto.php';
+require_once ('../config.php');
+
 $objProduto = new Produto();
         
 $objProduto->setNomeProduto($_POST["inputNomeProduto"]);

@@ -2,9 +2,16 @@
 <?php include_once "../_include/header.php"; ?>
 <?php include_once "../_include/menu.php"; ?>
 
-<div class="container">
+<div class="container mt-3">
     <table class="table table-striped">
         <thead>
+        <div class="float-right">
+            <?php
+                if (isset($_SESSION['login'])) {
+                    echo '<a href="consultaEndereco.php" class="btn btn-outline-secondary" role="button" aria-pressed="true">Consultar Endereço</a>';
+                }
+            ?>
+        </div>
         <h5>Dados Pessoais</h5>
         <tr>
             <th>ID</th>
@@ -17,17 +24,15 @@
         </thead>
         <tbody>
             <?php
-            require_once '../model/Pessoa.php';
-            $mostrar = new Pessoa();
-            echo $mostrar->mostrarCadastro();
+                include_once "../controller/cadShow.php";
+                if ($_SESSION['perfil'] == 2 || $_SESSION['perfil'] == 3) {
+                    echo $objAdm->mostrarCadastro();
+                } else {
+                    echo $objCliente->mostrarCadastro();
+                }
             ?>
         </tbody>
     </table>
-    <?php
-    if (isset($_SESSION['login'])) {
-        echo '<a href="consultaEndereco.php" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Consultar Endereço</a>';
-    }
-    ?>
 </div>
 
 <?php include_once "../_include/footer.php"; ?>

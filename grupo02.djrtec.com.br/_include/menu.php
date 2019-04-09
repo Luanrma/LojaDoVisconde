@@ -1,9 +1,9 @@
 <div class="d-block p-2 bg-dark text-white"> 
     <div class='mr-2 float-right sticky-top'>
         <?php
-        if (isset($_SESSION['login'])):
+        if (isset($_SESSION['login'])) {
             echo '<p class="text-success">' . $_SESSION['login'] . '</p>';
-        endif;
+        }
         ?>
     </div>
     <form class="form-inline my-2 my-lg-0">
@@ -23,19 +23,34 @@
                 <a class="nav-link" href="../index.php">Home <span class="sr-only">(current)</span></a>
             </li>
             <?php
-                if ($_SESSION['perfil'] == 2 || $_SESSION['perfil'] == 3){
-                    echo ' <li class="nav-item">
-                                <a class="nav-link" href="view/cadastroProduto.php">Produtos</a>
-                           </li>';
-                }
+            if ($_SESSION['perfil'] == 2 || $_SESSION['perfil'] == 3) {
+                echo '<li class="nav-item">
+                                <a class="nav-link" href="cadastroProduto.php">Produtos</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarConsulta" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Consultas
+                            </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarConsulta">';
+                echo '<a class="dropdown-item" href="consultaPessoa.php">Clientes</a>';
+                echo '<a class="dropdown-item" href="consultaEndereco.php">Endereço</a>';
+
+                echo '</div>
+                            </li>';
+            }
             ?>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Cadastro
+                    Perfil
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="cadastroPessoa.php">Cadastro</a>
-                    <a class="dropdown-item" href="consultaPessoa.php">Consulta</a>
+                    <?php
+                    if (isset($_SESSION['login'])) {
+                        echo '<a class="dropdown-item" href="consultaPessoa.php">Consulta</a>';
+                    } else {
+                        echo '<a class="dropdown-item" href="cadastroPessoa.php">Cadastro</a>';
+                    }
+                    ?>               
                 </div>
             </li>
         </ul>

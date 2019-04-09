@@ -1,7 +1,7 @@
 <?php
 
 class Pessoa {
-    
+
     private $idPessoa;
     private $tipoPessoa;
     private $nomePessoa;
@@ -11,22 +11,26 @@ class Pessoa {
     private $email;
     private $senha;
     
+    public function __construct() {
+        $this->conn = new PDO("mysql:host=localhost;dbname=grupo02_g2","grupo02_user","tecpuc2019");
+    }
+    
     public function getTipoPessoa() {
         return $this->tipoPessoa;
     }
-    
+
     public function setTipoPessoa($tipoPessoa) {
         $this->tipoPessoa = $tipoPessoa;
     }
-    
+
     public function getIdPessoa() {
         return $this->idPessoa;
     }
-    
+
     public function setIdPessoa($idPessoa) {
         $this->idPessoa = $idPessoa;
     }
-    
+
     public function getNomePessoa() {
         return $this->nomePessoa;
     }
@@ -75,11 +79,27 @@ class Pessoa {
         $this->senha = md5($senha);
     }
 
+    public function selectPessoa($statment) {
+
+        $stmt = $this->conn->prepare($statment);
+        $stmt->execute();
+
+        if ($stmt->rowCount() != 0) {
+            while ($registros = $stmt->fetch(PDO::FETCH_ASSOC)) {
+
+                $this->setIdPessoa($registros['idPessoa']);
+                $this->setTipoPessoa($registros['tipoPessoa']);
+                $this->setNomePessoa($registros['nomePessoa']);
+                $this->setEmail($registros['email']);
+                $this->setRazaoSocial($registros['razaoSocial']);
+                $this->setNascimento($registros['nascimento']);
+            }
+        }
+    }
+
     public function cadastrarPessoa() {
 
-        include_once 'conexao.php';
-
-        $stmt = $conn->prepare("INSERT INTO pessoa (fk_idPerfil, nomePessoa, email, senha, nascimento, razaoSocial) "
+        $stmt = $this->conn->prepare("INSERT INTO pessoa (fk_idPerfil, nomePessoa, email, senha, nascimento, razaoSocial) "
                 . "VALUES(1, :nome, :email, :senha, :nascimento, :razaoSocial)");
 
         $stmt->bindParam(":nome", $this->getNomePessoa());
@@ -94,48 +114,14 @@ class Pessoa {
         exit();
     }
 
-    public function mostrarCadastro() {
-
-        include_once 'conexao.php';
-        $id = $_SESSION['idPessoa'];
-        $stmt = $conn->prepare("SELECT *, perfil_usuario.tipoPessoa "
-                . "FROM pessoa JOIN perfil_usuario "
-                . "ON pessoa.fk_idPerfil = perfil_usuario.idPerfil "
-                . "WHERE idPessoa = $id");
-        $stmt->execute();
-
-        if ($stmt->rowCount() != 0) {
-            while ($registros = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                
-                $this->setIdPessoa($registros['idPessoa']);
-                $this->setTipoPessoa($registros['tipoPessoa']);
-                $this->setNomePessoa($registros['nomePessoa']);
-                $this->setEmail($registros['email']);
-                $this->setRazaoSocial($registros['razaoSocial']);
-                $this->setNascimento($registros['nascimento']);
-
-                echo "<tr>";
-                echo "<td>". $this->getIdPessoa() ."</td><td>". $this->getTipoPessoa() ."</td>";
-                echo "<td>". $this->getNomePessoa() ."</td><td>". $this->getEmail() ."</td>";
-                echo "<td>". $this->getRazaoSocial() ."</td><td>". $this->getNascimento() ."</td>";
-                echo "</tr>";
-            }
-        }
-    }
-
-    public function atualizarCadastro() {
-        
-    }
-
     public function efetuarLogin() {
         session_start();
-        include_once 'conexao.php';
-
-        $stmt = $conn->prepare("SELECT * FROM pessoa WHERE email = :EMAIL and senha = :SENHA");
+        
+        $stmt = $this->conn->prepare("SELECT * FROM pessoa WHERE email = :EMAIL and senha = :SENHA");
 
         $stmt->bindParam(":EMAIL", $this->getEmail());
         $stmt->bindParam(":SENHA", $this->getSenha());
-        
+
         $stmt->execute();
 
         if ($stmt->rowCount() != 0) {
@@ -146,7 +132,7 @@ class Pessoa {
             }
             $_SESSION['login'] = 'Bem vindo ' . $nome . '!';
             $_SESSION['idPessoa'] = $id;
-            $_SESSION['tipo'] = $tipo;
+            $_SESSION['perfil'] = $tipo;
             header('Location:../index.php');
             exit();
         } else {

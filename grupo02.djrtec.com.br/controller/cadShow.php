@@ -1,9 +1,11 @@
 <?php
+session_start();
 
-include_once '../model/Pessoa.php';
+ require_once ('../config.php');
 
-    $mostrar = new Pessoa();
+    $id = $_SESSION['idPessoa'];
     
-    $mostrar->mostrarCadastro();
-
+    $objAdm = new Administrador();
+    $objCliente = new Cliente();
+    $objEndereco = new Endereco();
 ?>

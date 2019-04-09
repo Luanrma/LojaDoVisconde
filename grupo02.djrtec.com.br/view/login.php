@@ -2,7 +2,7 @@
 <?php include_once '../_include/header.php' ?>
 <?php include_once '../_include/menu.php' ?>
 <div class="container">
-    <form action="../controller/control.php" method="post">
+    <form action="../controller/login.php" method="post">
         <div class="form-group text-dark mt-4">  
 
             <?php

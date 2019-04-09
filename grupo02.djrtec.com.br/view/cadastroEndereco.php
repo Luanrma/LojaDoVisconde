@@ -58,7 +58,7 @@
                 <div class="form-row mb-3">
                     <div class="col-sm-12">
                         <button type="submit" class="btn btn-primary">Cadastrar</button>
-                        <a  href="cadastroPessoa.php" tabindex="0" class="btn btn-secondary ml-2" role="button" data-placement="right">Voltar</a>
+                        <a  href="consultaEndereco.php" class="btn btn-secondary ml-2">Voltar</a>
                     </div>
                 </div>
             </div>

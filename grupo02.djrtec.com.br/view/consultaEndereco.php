@@ -2,9 +2,16 @@
 <?php include_once "../_include/header.php"; ?>
 <?php include_once "../_include/menu.php"; ?>
 
-<div class="container">
+<div class="container mt-3">
     <table class="table table-striped">
         <thead>
+            <div class="float-right">
+            <?php
+                if (isset($_SESSION['login'])) {
+                    echo '<a href="consultaPessoa.php" class="btn btn-outline-secondary" role="button" aria-pressed="true">Consultar Cadastro</a>';
+                }
+            ?> 
+        </div>
         <h5>Endereço</h5>
         <tr>
             <th>Estado</th>
@@ -17,13 +24,12 @@
         </thead>
         <tbody>
             <?php
-            require_once '../model/Endereco.php';
-            $showEndereco = new Endereco();
-            echo $showEndereco->mostrarEndereco();
+            include_once "../controller/cadShow.php";
+            echo $objEndereco->mostrarEndereco();
             ?>
         </tbody>
     </table>
-    <a href="consultaPessoa.php" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Consultar Cadastro</a>;
+    <a href="cadastroEndereco.php" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Cadastro Endereço</a>
 </div>
 
 <?php include_once "../_include/footer.php"; ?>

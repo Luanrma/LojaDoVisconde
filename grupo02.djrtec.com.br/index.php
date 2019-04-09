@@ -27,16 +27,24 @@
             if ($_SESSION['perfil'] == 2 || $_SESSION['perfil'] == 3) {
                 echo ' <li class="nav-item">
                                 <a class="nav-link" href="view/cadastroProduto.php">Produtos</a>
-                           </li>';
+                       </li>
+                       <li class="nav-item">
+                                <a class="nav-link" href="view/consultaPessoa.php">Consulta</a>
+                       </li> ';
             }
             ?>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Cadastro
+                    Perfil
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="view/cadastroPessoa.php">Cadastro</a>
-                    <a class="dropdown-item" href="view/consultaPessoa.php">Consulta</a>
+                    <?php
+                        if (isset($_SESSION['login'])){
+                            echo '<a class="dropdown-item" href="view/consultaPessoa.php">Consulta</a>';
+                        } else {
+                            echo '<a class="dropdown-item" href="view/cadastroPessoa.php">Cadastro</a>';
+                        }       
+                     ?>               
                 </div>
             </li>
         </ul>
@@ -49,8 +57,6 @@
         ?>
     </div>
 </nav>
-
-
 
 <div class="container">
     <div class="row">

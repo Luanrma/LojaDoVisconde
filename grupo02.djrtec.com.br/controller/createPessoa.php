@@ -1,6 +1,6 @@
 <?php
 
-include_once '../model/Pessoa.php';
+require_once ('../config.php');
 
 $senha = $_POST["inputSenha"];
 $verificaSenha = $_POST["inputVerificaSenha"];
